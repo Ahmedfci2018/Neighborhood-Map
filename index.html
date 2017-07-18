@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <title>Neighborhood Map</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="device=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+<body>
+    <div id="markerList">
+         <form action="action_page.php">
+             <input list="markers" id="marker" type="text" oninput="myFunction()">
+                 <datalist id="markers">
+                     <option value="Petrol station (Abu Arab)">
+                     <option value="EL Menia University Hospital">
+                     <option value="Menia Armed Forces Club">
+                     <option value="Opera">
+                     <option value="Safari">
+                 </datalist> 
+        </form>
+    </div>
+<div id="googleMap"></div>
+
+<script type="text/javascript" src="js/app.js">
+
+</script>
+    <script type="text/javascript" src="js/knockoutjs-3.4.2.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLpjFc9MfL7fnwqhX84HmQsefnPBz-c_0&callback=myMap"></script>
+
+</body>
+</html>
