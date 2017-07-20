@@ -3,29 +3,34 @@
     <head>
           <title>Neighborhood Map</title>
         <meta charset="utf-8">
+        <!-- for mobile and tablet -->
         <meta name="viewport" content="device=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
     </head>
 <body>
+    <!-- this block contains all locations and filter locations -->
     <div id="markerList">
-         <form action="action_page.php">
-             <input list="markers" id="marker" type="text" oninput="myFunction()">
-                 <datalist id="markers">
-                     <option value="Petrol station (Abu Arab)">
-                     <option value="EL Menia University Hospital">
-                     <option value="Menia Armed Forces Club">
-                     <option value="Opera">
-                     <option value="Safari">
-                 </datalist> 
-        </form>
+        <input list="markers" id="marker" type="text" oninput="myFunction()">
+<datalist id="markers" data-bind="foreach: locations">
+    <option data-bind="text: title"></option>
+    </datalist>
     </div>
+    
+    <!-- this block for display map -->
 <div id="googleMap"></div>
 
+    
+    
+    <!-- All Scripts -->
 <script type="text/javascript" src="js/app.js">
 
 </script>
-    <script type="text/javascript" src="js/knockoutjs-3.4.2.js"></script>
-
+    
+    <!-- load Knockout -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+    <!-- load jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- load Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLpjFc9MfL7fnwqhX84HmQsefnPBz-c_0&callback=myMap"></script>
 
 </body>
