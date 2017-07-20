@@ -20,24 +20,34 @@
     });
     
         //event of marker listener 
-    google.maps.event.addListener(markers[i],'click',info);
+    google.maps.event.addListener(markers[i],'click',selectInfo);
     var marker;
         
         //handle drop down list if user select location 
-    document.querySelector('input').oninput = info;
+    document.querySelector('input').oninput = selectInfo;
     
     }
     
-    //this function used to get and format all information and show it in the infoWindow
-    function info() {
-        infoMarker.close();
-        for (var j=0;j<locations.length;j++){
+     function selectInfo(){
+         for (var j=0;j<locations.length;j++){
             if(this.value==locations[j].title || this.title==locations[j].title){
-       
-                // this function get info from foursquare API
-               getContent = function() {
+                info(locations[j].title,locations[j].streetAddress,locations[j].city,locations[j].locID,markers[j]);
+                break;
+            }
+         }
+     }
+    //this function used to get and format all information and show it in the infoWindow
+    function info(title,street,city,loc,mar) {
+        infoMarker.close();
+        var t=title;
+        var s=street;
+        var c=city;
+        var l=loc;
+        
+               // this function get info from foursquare API
+              
 		
-		var urlAPI = 'https://api.foursquare.com/v2/venues/'+locations[j].locID+'/tips?v=20131016&sort=recent&limit=10&client_id=FKB1CVH4USQGZG5JGCENOTGDQYJGH1BCYLDCMSSMDCGJDVYP&client_secret=B332K3I0EDXOAFFVGOSLW5PLDUYFEXUSFBHPWAE1ZDHJ05TS';
+		var urlAPI = 'https://api.foursquare.com/v2/venues/'+l+'/tips?v=20131016&sort=recent&limit=10&client_id=FKB1CVH4USQGZG5JGCENOTGDQYJGH1BCYLDCMSSMDCGJDVYP&client_secret=B332K3I0EDXOAFFVGOSLW5PLDUYFEXUSFBHPWAE1ZDHJ05TS';
                   var topTips = [];
 
 		$.getJSON(urlAPI).done(function(data) {
@@ -45,22 +55,19 @@
 					topTips.push('<li>' + tips.text + '</li>');
 				});
 
-				infoMarker.setContent( '<h1>' + locations[j].title + '</h1>' + '<b>Street Adress : </b>' +locations[j].streetAddress+'<br> <b>City : </b>'+locations[j].city+'<br> <h2>The last visitor\'s comments </h2> <b> <ol class="tips">' + topTips.join('') + '</ol>');
+				infoMarker.setContent( '<h1>' + t + '</h1>' + '<b>Street Adress : </b>' +s+'<br> <b>City : </b>'+c+'<br> <h2>The last visitor\'s comments </h2> <b> <ol class="tips">' + topTips.join('') + '</ol>');
 			}).fail(function() {
-				infoMarker.setContent( '<h1>' + locations[j].title + '</h1>' + '<b>Street Adress : </b>' +locations[j].streetAddress+'<br> <b>City : </b>'+locations[j].city+'<br> <h2>The last visitor\'s comments </h2>');				
+				infoMarker.setContent( '<h1>' + t + '</h1>' + '<b>Street Adress : </b>' +s+'<br> <b>City : </b>'+c+'<br> <h2>The last visitor\'s comments </h2>');				
 				alert('some error occure with API');
 			});
-		}();
                 
         //infoMarker.setContent(contString);
        //infoMarker.setPosition(new google.maps.LatLng(locations[j].lat,locations[j].lng));
               //  map.panTO(markers[j].getPosition());
-       markers[j].setAnimation(google.maps.Animation.BOUNCE);
+       mar.setAnimation(google.maps.Animation.BOUNCE);
         //this.value=" ";
-marker=markers[j];
-                break;
-            }
-        }
+marker=mar;
+            
                                   
                            infoMarker.open(map,marker);   // show infoWindow on the marker
 
