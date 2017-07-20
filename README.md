@@ -2,7 +2,7 @@
 
 ## How to run this app
 
-1.download repos from[here]https://github.com/Ahmedfci2018/Neighborhood-Map
+1.download repos from[here](https://github.com/Ahmedfci2018/Neighborhood-Map).
 3.check your internet connection.
 2.open index.html in your browser.
 
