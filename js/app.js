@@ -1,8 +1,7 @@
 //this main function contains all about map 
  var myMap=function() {
-    var currrMarker;
     var infoMarker;
-   // var contString;
+   //set Default Center of map 
     var myCenter=new google.maps.LatLng(locations[0].lat,locations[0].lng);
     //get map by id 
     var myCanvas = document.getElementById("googleMap");
@@ -47,9 +46,9 @@
 				});
 
 				infoMarker.setContent( '<h1>' + locations[j].title + '</h1>' + '<b>Street Adress : </b>' +locations[j].streetAddress+'<br> <b>City : </b>'+locations[j].city+'<br> <h2>The last visitor\'s comments </h2> <b> <ol class="tips">' + topTips.join('') + '</ol>');
-			}).fail(function(jqXHR, textStatus, errorThrown) {
+			}).fail(function() {
 				infoMarker.setContent( '<h1>' + locations[j].title + '</h1>' + '<b>Street Adress : </b>' +locations[j].streetAddress+'<br> <b>City : </b>'+locations[j].city+'<br> <h2>The last visitor\'s comments </h2>');				
-				console.log('getJSON request failed! ' + textStatus);
+				alert('some error occure with API');
 			});
 		}();
                 
@@ -69,16 +68,18 @@ marker=markers[j];
     }
     
 
-    function content(title,streetAdress,city){
+    function errorHandling(){
     
-    var contentString='<h1>'+title+'</h1>'+'<b>'+streetAdress+'<br>'+city;
-        return contentString;
+    alert("an Error is occured with load map pls check your internet connection");
     
     }
     
-    
-    //locations 
+     //Proper Use of Knockout seperate all element 
+     var viewModel={locations:locations};
+ ko.applyBindings(viewModel); 
 };
+
+//array of all Locations 
     var locations=[
         
         {
