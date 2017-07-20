@@ -1,6 +1,6 @@
 //this main function contains all about map 
 function myMap() {
-    var lastMarker;
+    var currrMarker;
     var infoMarker;
     var contString;
     var myCenter=new google.maps.LatLng(locations[0].lat,locations[0].lng);
@@ -20,7 +20,7 @@ function myMap() {
          infoMarker=new google.maps.InfoWindow({
         content:content(locations[i].title,locations[i].streetAddress,locations[i].city) 
     });
-    }
+    
         //event of marker listener 
     google.maps.event.addListener(markers[i],'click',function(){
                                 
@@ -76,7 +76,7 @@ marker=markers[j];
         
     
 };
-    
+    }
     
     function content(title,streetAdress,city){
     
