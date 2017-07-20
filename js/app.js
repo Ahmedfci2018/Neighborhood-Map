@@ -1,8 +1,8 @@
 //this main function contains all about map 
-function myMap() {
+ var myMap=function() {
     var currrMarker;
     var infoMarker;
-    var contString;
+   // var contString;
     var myCenter=new google.maps.LatLng(locations[0].lat,locations[0].lng);
     //get map by id 
     var myCanvas = document.getElementById("googleMap");
@@ -18,29 +18,22 @@ function myMap() {
         
         //create info window to dispaly information of marker 
          infoMarker=new google.maps.InfoWindow({
-        content:content(locations[i].title,locations[i].streetAddress,locations[i].city) 
     });
     
         //event of marker listener 
-    google.maps.event.addListener(markers[i],'click',function(){
-                                
-                                for (var n=0;n<locations.length;n++){
-                                      if(this.title==locations[n].title){
-                                  infoMarker.setContent(content(locations[n].title,locations[n].streetAddress,locations[n].city));
-                                 
-                                   this.setAnimation(google.maps.Animation.BOUNCE);
-                                          //window.setTimeout(function(){markers[n].setAnimation(null);},3000);
-                                  infoMarker.open(map,this);
-                                 
-                                      }}
-                                  });
+    google.maps.event.addListener(markers[i],'click',info);
     var marker;
         
         //handle drop down list if user select location 
-    document.querySelector('input').oninput = function() {
+    document.querySelector('input').oninput = info;
+    
+    }
+    
+    //this function used to get and format all information and show it in the infoWindow
+    function info() {
         infoMarker.close();
         for (var j=0;j<locations.length;j++){
-            if(this.value==locations[j].title){
+            if(this.value==locations[j].title || this.title==locations[j].title){
        
                 // this function get info from foursquare API
                getContent = function() {
@@ -64,7 +57,7 @@ function myMap() {
        //infoMarker.setPosition(new google.maps.LatLng(locations[j].lat,locations[j].lng));
               //  map.panTO(markers[j].getPosition());
        markers[j].setAnimation(google.maps.Animation.BOUNCE);
-        this.value=" ";
+        //this.value=" ";
 marker=markers[j];
                 break;
             }
@@ -73,11 +66,9 @@ marker=markers[j];
                            infoMarker.open(map,marker);   // show infoWindow on the marker
 
     
-        
-    
-};
     }
     
+
     function content(title,streetAdress,city){
     
     var contentString='<h1>'+title+'</h1>'+'<b>'+streetAdress+'<br>'+city;
@@ -87,7 +78,7 @@ marker=markers[j];
     
     
     //locations 
-}
+};
     var locations=[
         
         {
