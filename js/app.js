@@ -37,12 +37,8 @@
          }
      }
     //this function used to get and format all information and show it in the infoWindow
-    function info(title,street,city,loc,mar) {
+    function info(t,s,c,l,mar) {
         infoMarker.close();
-        var t=title;
-        var s=street;
-        var c=city;
-        var l=loc;
         
                // this function get info from foursquare API
               
