@@ -93,20 +93,34 @@ function error() {
     alert("an Error is occured with load map pls check your internet connection");  
 }
 
+//this function for show or hide markers
+function setMapOnAll(map) {
+    
+    for (var i = 0; i < markers.length; i++) 
+    {
+        
+        markers[i].setMap(map);
+        
+    }
+}
+
 //Proper Use of Knockout seperate all element
-$(function() {
+$(function() 
+  {
 
     var viewModel = {
         
         locations: ko.observableArray(locations),
         query: ko.observable(''),
         search: function(value) {
-            
+        
             viewModel.locations.removeAll();
+            setMapOnAll(null);
             
             for(var x in locations) {
                 if(locations[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
                     viewModel.locations.push(locations[x]);
+                    markers[x].setMap(map); //show filtered markers
                 }//end if
             }//end for loop
         }//end function 
