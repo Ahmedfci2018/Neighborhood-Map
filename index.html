@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-          <title>Neighborhood Map</title>
+        <title>Neighborhood Map</title>
         <meta charset="utf-8">
         <!-- for mobile and tablet -->
         <meta name="viewport" content="device=device-width, initial-scale=1.0">
+        <!-- All Scripts -->
+        
+        <!-- load jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        </script>
+        <script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'>
+        </script>
+        <!-- load javascript file -->
+        <script type="text/javascript" src="js/app.js"></script>
+        <!-- load Knockout -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/1.2.1/knockout-min.js">
+        </script>
+        <!-- load Map -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLpjFc9MfL7fnwqhX84HmQsefnPBz-c_0&callback=myMap&libraries=places" onerror="error()">
+        </script>
+        
+        <!-- load CSS style sheet -->
         <link rel="stylesheet" href="css/style.css">
     </head>
-<body>
-    <!-- this block contains all locations and filter locations -->
-    <div id="markerList">
-        <input list="markers" id="marker" type="text" oninput="myFunction()">
-<datalist id="markers" data-bind="foreach: locations">
-    <option data-bind="text: title"></option>
-    </datalist>
-    </div>
     
-    <!-- this block for display map -->
-<div id="googleMap"></div>
+    <body>
+        <!-- this block contains all locations and filter locations -->
+        <div id="markerList">
+            <input placeholder="Search about location…" type="search" name="q" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+            <div class="content">
+                <ul data-bind="template: {name:'locations', foreach:locations}">
+                </ul>
+            </div>
+        
+            <script data-proofer-ignore type="text/html" id="locations" >
+                <li class="li" data-bind="attr:{id:title},text:title,click:whatClicked">
+                </li>
+            </script>
+        </div>
+    
+        <!-- this block for display map -->
+        <div id="googleMap"></div>
 
-    
-    
-    <!-- All Scripts -->
-<script type="text/javascript" src="js/app.js">
-
-</script>
-    
-    <!-- load Knockout -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
-    <!-- load jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <!-- load Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLpjFc9MfL7fnwqhX84HmQsefnPBz-c_0&callback=myMap"></script>
-
-</body>
+    </body>
 </html>
